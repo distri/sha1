@@ -195,6 +195,12 @@
       "mode": "100644",
       "content": "CryptoJS = require \"../main\"\nSHA1 = CryptoJS.SHA1\n\ndescribe \"SHA1\", ->\n  it \"should hash stuff\", ->\n    sha = SHA1(\"\").toString()\n\n    assert sha\n\n  it \"should hash array buffers\", ->\n    arrayBuffer = new ArrayBuffer(0)\n\n    sha = SHA1(CryptoJS.lib.WordArray.create(arrayBuffer)).toString()\n\n    assert sha\n",
       "type": "blob"
+    },
+    "pixie.cson": {
+      "path": "pixie.cson",
+      "mode": "100644",
+      "content": "version: \"0.1.0\"\n",
+      "type": "blob"
     }
   },
   "distribution": {
@@ -212,11 +218,17 @@
       "path": "test/sha1",
       "content": "(function() {\n  var CryptoJS, SHA1;\n\n  CryptoJS = require(\"../main\");\n\n  SHA1 = CryptoJS.SHA1;\n\n  describe(\"SHA1\", function() {\n    it(\"should hash stuff\", function() {\n      var sha;\n      sha = SHA1(\"\").toString();\n      return assert(sha);\n    });\n    return it(\"should hash array buffers\", function() {\n      var arrayBuffer, sha;\n      arrayBuffer = new ArrayBuffer(0);\n      sha = SHA1(CryptoJS.lib.WordArray.create(arrayBuffer)).toString();\n      return assert(sha);\n    });\n  });\n\n}).call(this);\n",
       "type": "blob"
+    },
+    "pixie": {
+      "path": "pixie",
+      "content": "module.exports = {\"version\":\"0.1.0\"};",
+      "type": "blob"
     }
   },
   "progenitor": {
     "url": "http://strd6.github.io/editor/"
   },
+  "version": "0.1.0",
   "entryPoint": "main",
   "repository": {
     "id": 18529997,
