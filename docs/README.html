@@ -32,11 +32,60 @@
               <div class="pilwrap">
                 <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-              <p>SHA1 JS implementation</p>
+              <p>SHA1 JS implementation. Currently wrapping CryptoJS with a more uniform API.</p>
+<h2 id="usage">Usage</h2>
 
             </div>
             <div class="content"><pre><code>
 </code></pre>
+</div>
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              <div class="pilwrap">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>Strings</p>
+
+            </div>
+            <div class="content"><pre><code>string = &quot;&quot;
+
+SHA1 string, (sha) -&gt;
+  sha # &quot;da39a3ee5e6b4b0d3255bfef95601890afd80709&quot;</code></pre>
+</div>
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              <div class="pilwrap">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>Blobs</p>
+
+            </div>
+            <div class="content"><pre><code>blob = new Blob
+
+SHA1 blob, (sha) -&gt;
+  sha # &quot;da39a3ee5e6b4b0d3255bfef95601890afd80709&quot;</code></pre>
+</div>
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              <div class="pilwrap">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>Array buffers</p>
+
+            </div>
+            <div class="content"><pre><code>arrayBuffer = new ArrayBuffer
+
+SHA1 arrayBuffer, (sha) -&gt;
+  sha # &quot;da39a3ee5e6b4b0d3255bfef95601890afd80709&quot;</code></pre>
 </div>
         </li>
         
