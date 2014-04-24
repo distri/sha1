@@ -1,15 +1,21 @@
-CryptoJS = require "../main"
-SHA1 = CryptoJS.SHA1
+SHA1 = require "../main"
 
 describe "SHA1", ->
-  it "should hash stuff", ->
-    sha = SHA1("").toString()
+  it "should hash stuff", (done) ->
+    SHA1 "", (sha) ->
+      assert.equal sha, "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+      done()
 
-    assert sha
+  it "should hash blobs", (done) ->
+    blob = new Blob
 
-  it "should hash array buffers", ->
-    arrayBuffer = new ArrayBuffer(0)
+    SHA1 blob, (sha) ->
+      assert.equal sha, "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+      done()
 
-    sha = SHA1(CryptoJS.lib.WordArray.create(arrayBuffer)).toString()
+  it "should hash array buffers", (done) ->
+    arrayBuffer = new ArrayBuffer
 
-    assert sha
+    SHA1 arrayBuffer, (sha) ->
+      assert.equal sha, "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+      done()
