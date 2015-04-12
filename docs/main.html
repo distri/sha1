@@ -36,17 +36,16 @@
 
             </div>
             <div class="content"><pre><code class="lang-coffeescript">{SHA1} = CryptoJS = require(<span class="string">"./lib/crypto"</span>)
+Q = require <span class="string">"q"</span>
 
-module.<span class="function"><span class="title">exports</span></span> = (data, fn) -&gt;
-  <span class="keyword">if</span> data <span class="keyword">instanceof</span> Blob
-    blobTypedArray data, (arrayBuffer) -&gt;
-      fn(shaArrayBuffer(arrayBuffer))
-  <span class="keyword">else</span> <span class="keyword">if</span> data <span class="keyword">instanceof</span> ArrayBuffer
-    defer -&gt;
-      fn(shaArrayBuffer(data))
-  <span class="keyword">else</span>
-    defer -&gt;
-      fn(SHA1(data).toString())</code></pre>
+module.<span class="function"><span class="title">exports</span></span> = (data) -&gt;
+  Q.fcall -&gt;
+    <span class="keyword">if</span> data <span class="keyword">instanceof</span> Blob
+      blobTypedArray(data).<span class="keyword">then</span> shaArrayBuffer
+    <span class="keyword">else</span> <span class="keyword">if</span> data <span class="keyword">instanceof</span> ArrayBuffer
+      shaArrayBuffer(data)
+    <span class="keyword">else</span>
+      SHA1(data).toString()</code></pre>
 </div>
         </li>
         
@@ -72,19 +71,23 @@ module.<span class="function"><span class="title">exports</span></span> = (data,
               </div>
               
             </div>
-            <div class="content"><pre><code class="lang-coffeescript"><span class="function"><span class="title">defer</span></span> = (fn) -&gt;
-  setTimeout fn, <span class="number">0</span>
-
-<span class="function"><span class="title">shaArrayBuffer</span></span> = (arrayBuffer) -&gt;
+            <div class="content"><pre><code class="lang-coffeescript"><span class="function"><span class="title">shaArrayBuffer</span></span> = (arrayBuffer) -&gt;
   SHA1(CryptoJS.lib.WordArray.create(arrayBuffer)).toString()
 
-<span class="function"><span class="title">blobTypedArray</span></span> = (blob, fn) -&gt;
+<span class="function"><span class="title">blobTypedArray</span></span> = (blob) -&gt;
+  deferred = Q.defer()
+
   reader = <span class="keyword">new</span> FileReader()
 
   reader.<span class="function"><span class="title">onloadend</span></span> = -&gt;
-    fn(reader.result)
+    deferred.resolve(reader.result)
 
-  reader.readAsArrayBuffer(blob)</code></pre>
+  reader.onerror = deferred.reject
+  reader.onprogress = deferred.notify
+
+  reader.readAsArrayBuffer(blob)
+
+  <span class="keyword">return</span> deferred.promise</code></pre>
 </div>
         </li>
         
